@@ -3,19 +3,31 @@ body {
 	text-align: center;
 }
 .keypad {
+	background-color: white;
 	border: 1px solid black;
+	cursor: pointer;
 }
+
+.keypad:hover {
+	transform: translate(-1px,-1px);
+}
+
 .output-top{
 	margin-top: 50px;
 	border-top: 1px solid black;
+	height: 25px;
 }
 .output-bottom{
 	padding-bottom: 20px;
+	height: 30px;
 }
 
 .output-top, .output-bottom {
-	height: 20px;
 	border-left: 1px solid black;	
 	border-right: 1px solid black;
 	text-align: right;
+}
+
+.keypad[data-id='e'] {
+	line-height: 50px;
 }
