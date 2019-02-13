@@ -6,3 +6,4 @@ The project helps me to learn the following topics:
 2) Css bootstrap grid system
 3) javascript - function, and object
 4) getting started with responsive design.
+5) Git, version control
