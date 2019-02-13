@@ -5,9 +5,17 @@ body {
 .keypad {
 	border: 1px solid black;
 }
+.output-top{
+	margin-top: 50px;
+	border-top: 1px solid black;
+}
+.output-bottom{
+	padding-bottom: 20px;
+}
 
-.output {
-	margin-top: 10%;
-	height: 60px;
-	border: 1px solid black;	
+.output-top, .output-bottom {
+	height: 20px;
+	border-left: 1px solid black;	
+	border-right: 1px solid black;
+	text-align: right;
 }

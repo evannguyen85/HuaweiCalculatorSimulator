@@ -17,22 +17,23 @@
 		<div class="row">
 			<div class="col-4"></div>
 			<div class="col-4">
-				<div class="row output">
-					<div id="equation"></div>
-					<div id="result"></div>
+				<div class="row">
+					<div class="col output-top" id="equation"></div>
 				</div>
-				
+				<div class="row">
+					<div class="col output-bottom" id="result"></div>
+				</div>
 				<div class="row">
 					<div class="col-md-3 keypad">C</div>
 					<div class="col-md-3 keypad"><i class="fas fa-divide"></i></div>
 					<div class="col-md-3 keypad" id="times"><i class="fas fa-times"></i></div>
 					<div class="col-md-3 keypad"><i class="fas fa-backspace"></i></div>
 				</div>
-				<div class="row">
+				<div class="row" id="key789m">
 					<div class="col-3 keypad" id="seven">7</div>
 					<div class="col-3 keypad" id="eight">8</div>
-					<div class="col-3 keypad">9</div>
-					<div class="col-3 keypad"><i class="fas fa-minus"></i></div>
+					<div class="col-3 keypad" id="nine">9</div>
+					<div class="col-3 keypad" id="minus"><i class="fas fa-minus"></i></div>
 				</div>
 				<div class="row">
 					<div class="col-3 keypad">4</div>
@@ -53,7 +54,7 @@
 							<div class="col keypad">.</div>
 						</div>	
 					</div>
-					<div class="col-3 keypad"><i class="fas fa-equals"></i></div>
+					<div class="col-3 keypad" id="equal"><i class="fas fa-equals"></i></div>
 				</div>
 			</div>
 			<div class="col-4"></div>
