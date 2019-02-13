@@ -45,20 +45,17 @@ function calc() {
 	let units = enteredNum.split(' ');
 	console.log(units);
 
-	if (!units[2]) {
+	if (!units[2] && units[1] != '%') {
 		return + "NaN";
 	}
 	let a = +units[0];
 	let operator = units[1];
 	let b = +units[2];
-	
-	let result = execute(a,b,operator);
-
-	console.log(result);
-
-	//resultEle.innerHTML = result;
-
-	return result;
+	console.log("b = ", b);
+	if (operator == '%' && b == 0) {
+		return execute(a,1,operator);
+	}
+	return execute(a,b,operator);
 }
 
 function execute(a,b,operator) {
@@ -71,22 +68,10 @@ function execute(a,b,operator) {
 			return a / b;
 		case '*':
 			return a * b;
-		//%
+		case '%':
+			return (a / 100) * b;
 	}
 }
-
-// var equal = document.getElementById("equal");
-// equal.addEventListener("click", calc, false);
-
-
-// var firstKeyRowEle = document.getElementById("key789m");
-// firstKeyRowEle.addEventListener("click", displayEnteredKeys, false);
-
-// var clear = document.getElementById("clear");
-// clear.addEventListener("click", function(){
-// 	equationEle.innerHTML = "";
-// 	resultEle.innerHTML = "";
-// }, false);
 
 var keypads = document.getElementsByClassName("keypad");
 for (var i = keypads.length - 1; i >= 0; i--) {
@@ -96,11 +81,13 @@ for (var i = keypads.length - 1; i >= 0; i--) {
 function clear(){
 	equationEle.innerHTML = "";
 	resultEle.innerHTML = "";
+	keyHistories = [];
 }
 
 function backSpace() {
 	keyHistories.pop();
-	clear();
+	equationEle.innerHTML = "";
+	resultEle.innerHTML = "";
 	for (var i = 0; i < keyHistories.length; i++) {
 		equationEle.innerHTML += keyHistories[i];
 	}
