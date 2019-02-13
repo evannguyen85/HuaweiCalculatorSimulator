@@ -1,21 +1,21 @@
+var resultEle = document.getElementById("result");
+var equationEle = document.getElementById("equation");
+
 function add(a, b, e) {
 	if (e.target !== e.currentTarget) {
 		var clickedItem = e.target.id;
-		console.log("clicked item: ");
-		console.log(clickedItem);
-		console.log("clicked item 2: ", clickedItem);
+		var clickedValue = e.target.innerText;
+		console.log(e);
+
+		equationEle.innerHTML += clickedValue;
+		if (clickedItem === 'minus' || e.target.className === 'fas fa-minus') {
+			equationEle.innerHTML += ' - ';
+		}
 	}
 	return a + b;
 }
 
-
-
-var a = 5, b=10;
-var resultEle = document.getElementById("result");
-var equationEle = document.getElementById("equation");
-equationEle.innerHTML = a + " + " + b;
-
 var firstKeyRowEle = document.getElementById("key789m");
 firstKeyRowEle.addEventListener("click", function(e){
 	add(5, 6, e);
-}, false)
+}, false);
