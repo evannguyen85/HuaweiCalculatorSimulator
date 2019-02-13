@@ -1,0 +1,13 @@
+body {
+	font-family: "Times New Roman", Times, serif;
+	text-align: center;
+}
+.keypad {
+	border: 1px solid black;
+}
+
+.output {
+	margin-top: 10%;
+	height: 60px;
+	border: 1px solid black;	
+}

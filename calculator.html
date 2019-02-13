@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Huawei Calc Simulation</title>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="calculator.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-4"></div>
+			<div class="col-4">
+				<div class="row output">
+					<div id="equation"></div>
+					<div id="result"></div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-3 keypad">C</div>
+					<div class="col-md-3 keypad"><i class="fas fa-divide"></i></div>
+					<div class="col-md-3 keypad" id="times"><i class="fas fa-times"></i></div>
+					<div class="col-md-3 keypad"><i class="fas fa-backspace"></i></div>
+				</div>
+				<div class="row">
+					<div class="col-3 keypad" id="seven">7</div>
+					<div class="col-3 keypad" id="eight">8</div>
+					<div class="col-3 keypad">9</div>
+					<div class="col-3 keypad"><i class="fas fa-minus"></i></div>
+				</div>
+				<div class="row">
+					<div class="col-3 keypad">4</div>
+					<div class="col-3 keypad">5</div>
+					<div class="col-3 keypad">6</div>
+					<div class="col-3 keypad"><i class="fas fa-plus"></i></div>
+				</div>
+				<div class="row">
+					<div class="col-9">
+						<div class="row align-items-start">
+							<div class="col keypad">1</div>
+							<div class="col keypad">2</div>
+							<div class="col keypad">3</div>
+						</div>
+						<div class="row align-items-start">
+							<div class="col keypad"><i class="fas fa-percent"></i></div>
+							<div class="col keypad">0</div>
+							<div class="col keypad">.</div>
+						</div>	
+					</div>
+					<div class="col-3 keypad"><i class="fas fa-equals"></i></div>
+				</div>
+			</div>
+			<div class="col-4"></div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="calculator.js"></script>
+	<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
