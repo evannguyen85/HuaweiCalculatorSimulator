@@ -18,40 +18,63 @@ function displayEnteredKeys(e) {
 			clear();
 			break;
 		case 'b':
-			console.log("clicked b");
-			backSpace();
+			//console.log("clicked b");
+			keyHistories.pop();
+			showEquation();
 			printResult();
 			break;
 		case 'e':
-			console.log("clicked e");
-			calc();
+			//console.log("clicked e");
+			printResult();
 			break;
 		default:
-			equationEle.innerHTML += key;
+			console.log(equationEle.innerHTML);
+			let len = keyHistories.length;
+
+			//do not display the first key - not a number.
+			//except for - as used for negative number
+
+			if (len ==0 && (key.trim() == '-') ) {
+				keyHistories[0] = key.trim();
+				showEquation();
+			}
+
+			else if (len == 0 && isNaN(key) && !(key.trim() == '-')) {
+				clear();
+			}
+
+			else if (len > 0 && isNaN(key) && isNaN(keyHistories[len-1])) {
+				keyHistories[len-1] = key;
+				console.log(keyHistories);
+				showEquation();
+			}
+			else {
+				keyHistories.push(key);	
+				showEquation();
+			}
 			printResult();
-			keyHistories.push(key);
 	}
 }
 
-// function displayEnteredKeys(e){
-// 	console.log(e);
-// 	console.log(e.target.dataset.id);
-// }
+function printResult(){
+	let reslt = calc();
+	if (!isNaN(reslt)) {
+		resultEle.innerHTML = calc();
+	}
+}
 
-//when clicking equal sign to calculate
 function calc() {
 	let enteredNum = equationEle.innerHTML;
-	console.log(enteredNum);
 	let units = enteredNum.split(' ');
-	console.log(units);
+	
+	var operator = units[1];
+	var a = +units[0];
+	var b = +units[2];
 
 	if (!units[2] && units[1] != '%') {
 		return + "NaN";
 	}
-	let a = +units[0];
-	let operator = units[1];
-	let b = +units[2];
-	console.log("b = ", b);
+
 	if (operator == '%' && b == 0) {
 		return execute(a,1,operator);
 	}
@@ -75,6 +98,7 @@ function execute(a,b,operator) {
 
 var keypads = document.getElementsByClassName("keypad");
 for (var i = keypads.length - 1; i >= 0; i--) {
+	let len = keyHistories.length;
 	keypads[i].addEventListener("click", displayEnteredKeys, false);
 }
 
@@ -84,8 +108,7 @@ function clear(){
 	keyHistories = [];
 }
 
-function backSpace() {
-	keyHistories.pop();
+function showEquation() {
 	equationEle.innerHTML = "";
 	resultEle.innerHTML = "";
 	for (var i = 0; i < keyHistories.length; i++) {
@@ -93,9 +116,3 @@ function backSpace() {
 	}
 }
 
-function printResult(){
-	let reslt = calc();
-	if (!isNaN(reslt)) {
-		resultEle.innerHTML = calc();
-	}
-}
