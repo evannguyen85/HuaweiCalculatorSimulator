@@ -28,6 +28,8 @@ function displayEnteredKeys(e) {
 			break;
 		case 'e':
 			//console.log("clicked e");
+			equationEle.innerHTML = "";
+			resultEle.className += " final-result";
 			if (len>0) {
 				printResult();	
 			}
@@ -61,7 +63,7 @@ function displayEnteredKeys(e) {
 }
 
 function printResult(){
-	resultEle.innerHTML = calc();
+	resultEle.getElementsByTagName("span")[0].innerHTML = calc();
 }
 
 function calc() {
@@ -134,13 +136,13 @@ for (var i = keypads.length - 1; i >= 0; i--) {
 
 function clear(){
 	equationEle.innerHTML = "";
-	resultEle.innerHTML = "";
+	resultEle.querySelector("span").innerHTML = "";
 	keyHistories = [];
 }
 
 function showEquation() {
 	equationEle.innerHTML = "";
-	resultEle.innerHTML = "";
+	resultEle.querySelector("span").innerHTML = "";
 	for (var i = 0; i < keyHistories.length; i++) {
 		equationEle.innerHTML += keyHistories[i];
 	}

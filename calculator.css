@@ -11,11 +11,15 @@
 .output-top{
 	margin-top: 50px;
 	border-top: 1px solid black;
-	height: 25px;
+	height: 40px;
+	overflow: hidden;
+	line-height: 38px;
 }
 .output-bottom{
 	padding-bottom: 20px;
-	height: 30px;
+	height: 40px;
+	overflow: hidden;
+	line-height: 38px; 	
 }
 
 .output-top, .output-bottom {
@@ -27,3 +31,93 @@
 .keypad[data-id='e'] {
 	line-height: 74px;
 }
+
+.sidebar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 12pt;
+	background-color: rgb(238, 238, 238);
+}
+.sidebar > ul {
+	list-style: none;
+}
+
+.custom-nav {
+	height: 60px;
+	padding: 0px 20px;
+	
+}
+.custom-nav > a, .custom-nav > ul > li{
+	font-size: 16pt;
+}
+.custom-navbar-toggler-icon {
+	width: 30px;
+	height: 30px;
+}
+
+.search-textbox {
+	width: 150px;
+	height: 40px;
+    font-size: 16pt;
+}
+
+.search-button {
+	height: 40px;
+    font-size: 16pt;
+    line-height: 16px;
+}
+
+.calculator {
+	width: 30%; 
+	margin: 0 auto; 
+	text-align: center;
+}
+
+#result > span {
+	color: grey;
+	transition: 0.5s;
+}
+
+.final-result > span {
+	font-size: 30pt;
+	color: black;
+	transform: translateY(50%);
+}
+
+.try-transform {
+	width: 200px;
+	height: auto;
+	background-color: pink;
+	transition: width 3s;
+}
+.try-transform:hover {
+	width: 500px;
+}
+
+.extended-calculator {
+	width: 20%;
+	height: auto;
+	background-color: orange;
+	float: left;
+	display: inline-block;
+}
+
+@media only screen and (max-width: 900px) {
+	.calculator {
+		width: 50%;
+		margin: 0 auto; 
+	}
+} 
+
+
+
+
+
+
+
+
+
+
+
+
