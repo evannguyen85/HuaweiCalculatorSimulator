@@ -34,9 +34,6 @@ function displayEnteredKeys(e) {
 			
 			break;
 		default:
-			//console.log(equationEle.innerHTML);
-			
-
 			//do not display the first key - not a number.
 			//except for - as used for negative number
 
@@ -64,16 +61,11 @@ function displayEnteredKeys(e) {
 }
 
 function printResult(){
-	//let reslt = calc();
-	//if (!isNaN(reslt)) {
-		resultEle.innerHTML = calc();
-	//}
+	resultEle.innerHTML = calc();
 }
 
 function calc() {
-	//will need to handle long equation
-	//let enteredNum = equationEle.innerHTML;
-	//let units = enteredNum.split(' ');
+	//will need to handle long equation	
 	var output = "";
 	var len = keyHistories.length;
 	if (len <= 0) { return "";}
@@ -98,23 +90,6 @@ function calc() {
 		output += "*0.01";
 	}
 
-	//console.log(output);
-	//console.log(eval(output));
-	//console.log(keyHistories);
-	
-	// var operator = units[1];
-	// var a = +units[0];
-	// var b = +units[2];
-
-	// if (!units[2] && units[1] != '%') {
-	// 	return + "NaN";
-	// }
-
-	// if (operator == '%' && b == 0) {
-	// 	return execute(a,1,operator);
-	// }
-	//return execute(a,b,operator);
-
 	//do not show result when just the first number
 	if (!isNaN(output)) { 
 		return "";
@@ -134,8 +109,6 @@ function calc() {
 		console.log("error message: " + e.name);
 		return "error";
 	}
-
-	
 }
 
 function execute(a,b,operator) {
@@ -172,9 +145,6 @@ function showEquation() {
 		equationEle.innerHTML += keyHistories[i];
 	}
 }
-
-// var input = "9-2/2*3+4-3*6/2";
-// console.log(eval(input));
 
 
 
