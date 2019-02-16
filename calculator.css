@@ -8,24 +8,27 @@
 	transform: translate(-1px,-1px);
 }
 
-.output-top{
-	margin-top: 50px;
-	border-top: 1px solid black;
-	height: 40px;
+.output {
+	border-left: 1px solid black;
+	border-right: 1px solid black;
 	overflow: hidden;
-	line-height: 38px;
-}
-.output-bottom{
-	padding-bottom: 20px;
-	height: 40px;
-	overflow: hidden;
-	line-height: 38px; 	
+	text-align: right !important;
 }
 
-.output-top, .output-bottom {
-	border-left: 1px solid black;	
-	border-right: 1px solid black;
-	text-align: right;
+.output-top {
+	border-top: 1px solid black;	
+}
+
+.result > span {
+	color: grey;
+	transition: 0.5s;
+}
+
+.final-result > span {
+	font-size: 30pt;
+	color: black;
+	transform: translateY(-50%);
+	line-height: 30px;
 }
 
 .keypad[data-id='e'] {
@@ -68,45 +71,45 @@
     line-height: 16px;
 }
 
+.calculator-wrapper {
+	padding: 15px;
+	width: 100%;
+	margin-top: 50px;
+}
 .calculator {
-	width: 30%; 
-	margin: 0 auto; 
+	width: 60%; 
+	margin: 0px; 
 	text-align: center;
 }
 
-#result > span {
-	color: grey;
-	transition: 0.5s;
-}
-
-.final-result > span {
-	font-size: 30pt;
-	color: black;
-	transform: translateY(50%);
-}
-
-.try-transform {
-	width: 200px;
-	height: auto;
-	background-color: pink;
-	transition: width 3s;
-}
-.try-transform:hover {
-	width: 500px;
-}
-
 .extended-calculator {
-	width: 20%;
-	height: auto;
+	width: 60%;
+	height: 295px;
 	background-color: orange;
-	float: left;
+	float: right;
 	display: inline-block;
+	margin-top: 65px;
+	border: 1px solid black;
 }
 
-@media only screen and (max-width: 900px) {
+.custom-row-height {
+	height: 40px;
+}
+
+.custom-row-height-lg {
+	height: 50px;
+}
+.custom-row-width {
+	width: 48.3%;
+}
+
+@media only screen and (max-width: 700px) {
 	.calculator {
-		width: 50%;
-		margin: 0 auto; 
+		width: 70%;
+		margin: auto;
+	}
+	.extended-calculator {
+		display: none;
 	}
 } 
 

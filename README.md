@@ -43,6 +43,8 @@ developer tool:
 
 review again the box model.
 
+image html color: https://html-color-codes.info/colors-from-image/
+
 
 
 

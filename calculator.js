@@ -137,6 +137,7 @@ for (var i = keypads.length - 1; i >= 0; i--) {
 function clear(){
 	equationEle.innerHTML = "";
 	resultEle.querySelector("span").innerHTML = "";
+	resultEle.className = "col output result";
 	keyHistories = [];
 }
 
