@@ -24,14 +24,17 @@ function displayEnteredKeys(e) {
 				showEquation();
 				printResult();	
 			}
-			
+			else {
+				clear();
+			}
 			break;
 		case 'e':
 			//console.log("clicked e");
 			equationEle.innerHTML = "";
 			resultEle.className += " final-result";
 			if (len>0) {
-				printResult();	
+				printResult();
+				keyHistories = [];
 			}
 			
 			break;
