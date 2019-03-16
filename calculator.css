@@ -1,40 +1,10 @@
-.keypad {
-	background-color: white;
-	border: 1px solid black;
-	cursor: pointer;
+body {
+	width: 100%;
+	overflow-x: hidden;
+	box-sizing: content-box;
 }
 
-.keypad:hover {
-	transform: translate(-1px,-1px);
-}
-
-.output {
-	border-left: 1px solid black;
-	border-right: 1px solid black;
-	overflow: hidden;
-	text-align: right !important;
-}
-
-.output-top {
-	border-top: 1px solid black;	
-}
-
-.result > span {
-	color: grey;
-	transition: 0.5s;
-}
-
-.final-result > span {
-	font-size: 30pt;
-	color: black;
-	transform: translateY(-50%);
-	line-height: 30px;
-}
-
-.keypad[data-id='e'] {
-	line-height: 74px;
-}
-
+/* navbar */
 .sidebar {
 	position: absolute;
 	top: 0;
@@ -71,47 +41,94 @@
     line-height: 16px;
 }
 
-.calculator-wrapper {
-	padding: 15px;
-	width: 100%;
-	margin-top: 50px;
-}
-.calculator {
-	width: 60%; 
-	margin: 0px; 
+/* Basic Calculator */
+.calc-title {
 	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 30px;
 }
 
-.extended-calculator {
-	width: 60%;
-	height: 295px;
-	background-color: orange;
-	float: right;
-	display: inline-block;
-	margin-top: 65px;
+.basic-calculator {
+	width: 80%;
+	margin: auto;
 	border: 1px solid black;
-}
-
-.custom-row-height {
-	height: 40px;
+	font-size: 26px;
 }
 
 .custom-row-height-lg {
 	height: 50px;
 }
-.custom-row-width {
-	width: 48.3%;
+
+.in-out-panel {
+	/* border: 1px solid black; */
+	overflow: hidden;
+	text-align: right;
 }
 
-@media only screen and (max-width: 700px) {
-	.calculator {
-		width: 70%;
-		margin: auto;
-	}
+.keypad {
+	background-color: white;
+	border: 1px solid black;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.keypad:hover {
+	transform: translate(-1px,-1px);
+	background-color: #E9ECEF;
+}
+
+.custom-row-height {
+	height: 40px;
+	text-align: center;
+}
+
+.equal-keypad {
+	padding: 0;
+	height: 80px;
+}
+
+.keypad[data-id='e'] {
+	text-align: center;
+	/* 80px = height, then minus 2 borders (top and bottom, 1px each) */
+	line-height: 79px;
+}
+
+#result > span {
+	color: grey;
+	transition: 0.5s;
+}
+
+/* when clicking equal button. */
+.final-result > span {
+	font-size: 30pt;
+	color: black;
+	transform: translateY(-50%);
+	line-height: 30px;
+}
+
+/* Extended calculator */
+.extended-calculator {
+	display: none;
+}
+
+@media only screen and (min-width: 720px) {
 	.extended-calculator {
-		display: none;
+		display: inline-block;
+		float: left;
+		width: 50%;
+		height: 200px;
+		background-color: orange;
 	}
+	.basic-calculator {
+		width: 50%;
+		float: right;
+	}
+	
 } 
+
+
+
+
 
 
 

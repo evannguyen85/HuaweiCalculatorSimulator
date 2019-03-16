@@ -1,118 +1,106 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Huawei Calc Simulation</title>
 	<!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="description" content="Simulate calculator in Huawei Nova 2i smart phone">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta charset="utf-8">
+	<meta name="description" content="Simulate calculator in Huawei Nova 2i smart phone">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<!-- Bootstrap CSS and Fontawesome-->
+	<link rel="stylesheet" href="libs/bootstrap-4.0.0/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="libs/fontawesome-free-5.7.2-web/css/all.min.css">
 
 	<link rel="stylesheet" type="text/css" href="calculator.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
+
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark custom-nav">
-	  <a class="navbar-brand" href="javascript:void(0)">Logo</a>
-	  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
-	    <span class="navbar-toggler-icon custom-navbar-toggler-icon"></span>
-	  </button>
+		<a class="navbar-brand" href="javascript:void(0)">Logo</a>
+		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+			<span class="navbar-toggler-icon custom-navbar-toggler-icon"></span>
+		</button>
 
-	  <div class="collapse navbar-collapse custom-nav" id="navb">
-	    <ul class="navbar-nav mr-auto">
-	      <li class="nav-item">
-	        <a class="nav-link" href="javascript:void(0)">Link</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="javascript:void(0)">Link</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link disabled" href="javascript:void(0)">Disabled</a>
-	      </li>
-	    </ul>
-	    <form class="form-inline my-2 my-lg-0">
-	      <input class="form-control mr-sm-2 search-textbox" type="text" placeholder="Search">
-	      <button class="btn btn-success my-2 my-sm-0 search-button" type="button">Search</button>
-	    </form>
-	  </div>
+		<div class="collapse navbar-collapse custom-nav" id="navb">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="javascript:void(0)">Link</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="javascript:void(0)">Link</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link disabled" href="javascript:void(0)">Disabled</a>
+				</li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2 search-textbox" type="text" placeholder="Search">
+				<button class="btn btn-success my-2 my-sm-0 search-button" type="button">Search</button>
+			</form>
+		</div>
 	</nav>
 
 	<div class="container">
-		<div class="jumbotron" style="height: 150px; margin-bottom: 10px; padding: 15px">
-			<h2>Simple Calculator</h2>
-			<p>Simulating a simple calculator</p>
+		<div class="calc-title">
+			<h5>Huawei Calculator - Basic Mode</h5>
 		</div>
-
 		<div class="row">
-			<div class="col-md-6 col-sm-12" style="padding: 0;">
-				<div class="extended-calculator">
-					<p>placeholder for extended</p>
-				</div>
+			<!-- Extended calculator -->
+			<div class="col-md-6 extended-calculator">
+				<p>placeholder for extended</p>
 			</div>
 
-			<div class="col-md-6 col-sm-12">
-				<div class="calculator-wrapper">
-					<div class="row">
-						<div class="calculator">
-							<div class="row custom-row-height-lg">
-								<div class="col output output-top" id="equation"></div>
-							</div>
-							<div class="row custom-row-height-lg">
-								<div class="col output result" id="result">
-									<span></span>
-								</div>
-							</div>
+			<!-- Basic calculator -->
+			<div class="col-md-6 basic-calculator">
+				<div class="row custom-row-height-lg">
+					<div class="col in-out-panel" id="equation"></div>
+				</div>
+				<div class="row custom-row-height-lg">
+					<div class="col in-out-panel" id="result">
+						<span></span>
+					</div>
+				</div>
+				<div class="row custom-row-height">
+					<div class="col-3 keypad" data-id="c">C</div>
+					<div class="col-3 keypad" data-id=" / "><i class="fas fa-divide"></i></div>
+					<div class="col-3 keypad" data-id=" * "><i class="fas fa-times"></i></div>
+					<div class="col-3 keypad" data-id="b"><i class="fas fa-backspace"></i></div>
+				</div>
+				<div class="row custom-row-height">
+					<div class="col-3 keypad" data-id="7">7</div>
+					<div class="col-3 keypad" data-id="8">8</div>
+					<div class="col-3 keypad" data-id="9">9</div>
+					<div class="col-3 keypad" data-id=" - "><i class="fas fa-minus"></i></div>
+				</div>
+				<div class="row custom-row-height">
+					<div class="col-3 keypad" data-id="4">4</div>
+					<div class="col-3 keypad" data-id="5">5</div>
+					<div class="col-3 keypad" data-id="6">6</div>
+					<div class="col-3 keypad" data-id=" + "><i class="fas fa-plus"></i></div>
+				</div>
+				<div class="row">
+					<div class="col-9">
+						<div class="row custom-row-height">
+							<div class="col keypad" data-id="1">1</div>
+							<div class="col keypad" data-id="2">2</div>
+							<div class="col keypad" data-id="3">3</div>
 						</div>
-						
-					</div>	
-
-
-
-					<div class="row">
-						<div class="calculator">
-							<div class="row custom-row-height">
-								<div class="col-3 keypad" data-id="c">C</div>
-								<div class="col-3 keypad" data-id=" / "><i class="fas fa-divide"></i></div>
-								<div class="col-3 keypad" data-id=" * "><i class="fas fa-times"></i></div>
-								<div class="col-3 keypad" data-id="b"><i class="fas fa-backspace"></i></div>
-							</div>
-							<div class="row custom-row-height">
-								<div class="col-3 keypad" data-id="7">7</div>
-								<div class="col-3 keypad" data-id="8">8</div>
-								<div class="col-3 keypad" data-id="9">9</div>
-								<div class="col-3 keypad" data-id=" - "><i class="fas fa-minus"></i></div>
-							</div>
-							<div class="row custom-row-height">
-								<div class="col-3 keypad" data-id="4">4</div>
-								<div class="col-3 keypad" data-id="5">5</div>
-								<div class="col-3 keypad" data-id="6">6</div>
-								<div class="col-3 keypad" data-id=" + "><i class="fas fa-plus"></i></div>
-							</div>
-							<div class="row custom-row-height">
-								<div class="col-9">
-									<div class="row align-items-start">
-										<div class="col keypad" data-id="1">1</div>
-										<div class="col keypad" data-id="2">2</div>
-										<div class="col keypad" data-id="3">3</div>
-									</div>
-									<div class="row align-items-start">
-										<div class="col keypad" data-id=" % "><i class="fas fa-percent"></i></div>
-										<div class="col keypad" data-id="0">0</div>
-										<div class="col keypad" data-id=".">.</div>
-									</div>	
-								</div>
-								<div class="col-3 keypad" data-id="e"><i class="fas fa-equals"></i></div>
-							</div>
-						</div>	
+						<div class="row custom-row-height">
+							<div class="col keypad" data-id=" % "><i class="fas fa-percent"></i></div>
+							<div class="col keypad" data-id="0">0</div>
+							<div class="col keypad" data-id=".">.</div>
+						</div>
+					</div>
+					<div class="col-3 equal-keypad">
+						<div class="keypad" data-id="e"><i class="fas fa-equals"></i></div>
 					</div>
 				</div>
 			</div>
 		</div>
-		</div>
 	</div>
-<!-- 	<div class="sidebar">
+	</div>
+	<!-- 	<div class="sidebar">
 			<ul>
 				<li>Caclultor</li>
 				<li>Weather Forecast</li>
@@ -120,13 +108,10 @@
 			</ul>
 	</div> -->
 
-	
-
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="libs/jquery/jquery-3.3.1.slim.min.js"></script>
+	<script src="libs/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="calculator.js"></script>
-	<!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
+
 </html>
