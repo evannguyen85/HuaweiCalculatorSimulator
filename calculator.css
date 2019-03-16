@@ -42,6 +42,9 @@ body {
 }
 
 /* Basic Calculator */
+.container {
+	width: 70%;
+}
 .calc-title {
 	text-align: center;
 	margin-top: 50px;
@@ -49,7 +52,6 @@ body {
 }
 
 .basic-calculator {
-	width: 80%;
 	margin: auto;
 	border: 1px solid black;
 	font-size: 26px;
@@ -60,15 +62,13 @@ body {
 }
 
 .in-out-panel {
-	/* border: 1px solid black; */
-	overflow: hidden;
+	overflow-x: hidden;
 	text-align: right;
-	overflow: visible;
 }
 
 .keypad {
 	background-color: white;
-	border: 1px solid black;
+	border: 0.5px solid grey;
 	cursor: pointer;
 	transition: 0.3s;
 }
@@ -90,6 +90,7 @@ body {
 
 .keypad[data-id='e'] {
 	text-align: center;
+	background-color: #66a3ff;
 	/* 80px = height, then minus 2 borders (top and bottom, 1px each) */
 	line-height: 79px;
 }
@@ -101,9 +102,9 @@ body {
 
 /* when clicking equal button. */
 .final-result {
-	font-size: 60px;
+	font-size: 40px;
 	color: black;
-	transform: translateY(-35%);
+	transform: translateY(-30%);
 	line-height: 30px;
 }
 
@@ -112,21 +113,24 @@ body {
 	display: none;
 }
 
-@media only screen and (min-width: 720px) {
+@media only screen and (min-width: 700px) {
+	.container {
+		width: 700px;
+		margin: auto;
+	}
 	.extended-calculator {
 		display: inline-block;
 		float: left;
-		width: 50%;
-		height: 200px;
+		width: 30%;
+		/* height: 200px; */
 		background-color: orange;
 	}
 	.basic-calculator {
-		width: 50%;
-		float: right;
+		display: inline-block;
+		width: 70%;
+		/* float: right; */
 	}
-	
 } 
-
 
 
 
