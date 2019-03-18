@@ -126,7 +126,7 @@ function power(base, exponent) {
 
 function evaluate(keys) {
 	const keyStr = keys.join('');
-	let found = keyStr.replace(/(\^)(\()(\d)\)/g, '**$3');
+	let found = keyStr.replace(/(\^)(\()(\d)|(\^)(\()(\d)\)/g, '**$3');
 	// console.log(found);
 	if (found.match(/\%\d/g)) {
 		return found.replace(/(\%)(\d)/g, '*0.01*$2');
