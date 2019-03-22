@@ -63,12 +63,28 @@ function displayEnteredKeys(e) {
 			showEquation();
 			printResult();
 			break;
+
 		case 'log':
 			key = 'log(';
 			keyHistories.push(key);
 			showEquation();
 			printResult();
 			break;
+
+		case 'ex':
+			key = '&#101;^(';
+			keyHistories.push(key);
+			showEquation();
+			printResult();
+			break;
+			
+		case '10x':
+			key = '10^(';
+			keyHistories.push(key);
+			showEquation();
+			printResult();
+			break;
+
 		case 'sin':
 			key = 'sin(';
 			keyHistories.push(key);
@@ -102,7 +118,7 @@ function displayEnteredKeys(e) {
 			degToRad();
 			printResult();
 			break;
-		
+
 		case 'rad':
 			degree = true;
 			radToDeg();
@@ -278,19 +294,19 @@ function pi() {
 }
 
 function sin(x) {
-	if(degree) {
+	if (degree) {
 		x = x * pi() / 180;
 	}
 	return Math.sin(x);
 }
 function cos(x) {
-	if(degree) {
+	if (degree) {
 		x = x * pi() / 180;
 	}
 	return Math.cos(x);
 }
 function tan(x) {
-	if(degree) {
+	if (degree) {
 		x = x * pi() / 180;
 	}
 	return Math.tan(x);
@@ -326,7 +342,21 @@ function degToRad() {
 
 function inversion() {
 	var ln = document.querySelectorAll("[data-id='ln']")[0];
-	ln.innerHTML = 'e^x';
-	ln.dataset.id = 'e^x';
-	console.log(ln.dataset.id);
+	var log = document.querySelectorAll("[data-id='log']")[0];
+	var ePowerX = document.querySelectorAll("[data-id='ex']")[0];
+	var tenPowerX = document.querySelectorAll("[data-id='10x']")[0];
+
+	if (ln && log) {
+		ln.innerHTML = 'e^x';
+		ln.dataset.id = 'ex';
+		log.innerHTML = '10^x';
+		log.dataset.id = '10x';
+	} else if (ePowerX && tenPowerX) {
+		ePowerX.innerHTML = 'ln';
+		ePowerX.dataset.id = 'ln';
+		tenPowerX.innerHTML = 'log';
+		tenPowerX.dataset.id = 'log';
+	} else {
+		console.log("One or more errors");
+	}
 }
