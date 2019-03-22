@@ -239,19 +239,35 @@ function evaluate(keys) {
 		found = found.replace(/(\d+)&#928;/g, '$1*pi()');
 		found = found.replace(/&#928;(\d+)/g, '$1*pi()');
 		found = found.replace(/&#928;/g, pi());
+
 	} else if (found.match(/&#101;/g)) { //for base e
 		found = found.replace(/(\d+)&#101;/g, `$1*baseE()`);
 		found = found.replace(/&#101;(\d+)/g, `$1*baseE()`);
 		found = found.replace(/&#101;/g, baseE());
+
 	} else if (found.match(/sin\(\d+/g)) { //for sin
+		found = found.replace(/(\d+)sin\((\d+)\)/g, `$1*sin($2)`);
+		found = found.replace(/sin\((\d+)\)(\d+)/g, `sin($1)*$2`);
 		found = found.replace(/sin\((\d+)\)/g, `sin($1)`);
+
 	} else if (found.match(/cos\(\d+/g)) { //for cos
+		found = found.replace(/(\d+)cos\((\d+)\)/g, `$1*cos($2)`);
+		found = found.replace(/cos\((\d+)\)(\d+)/g, `cos($1)*$2`);
 		found = found.replace(/cos\((\d+)\)/g, `cos($1)`);
+
 	} else if (found.match(/tan\(\d+/g)) { //for tan
+		found = found.replace(/(\d+)tan\((\d+)\)/g, `$1*tan($2)`);
+		found = found.replace(/tan\((\d+)\)(\d+)/g, `tan($1)*$2`);
 		found = found.replace(/tan\((\d+)\)/g, `tan($1)`);
+
 	} else if (found.match(/ln\(\d+/g)) { //for ln
+		found = found.replace(/(\d+)ln\((\d+)\)/g, `$1*ln($2)`);
+		found = found.replace(/ln\((\d+)\)(\d+)/g, `ln($1)*$2`);
 		found = found.replace(/ln\((\d+)\)/g, `ln($1)`);
+
 	} else if (found.match(/log\(\d+/g)) { //for log
+		found = found.replace(/(\d+)log\((\d+)\)/g, `$1*log($2)`);
+		found = found.replace(/log\((\d+)\)(\d+)/g, `log($1)*$2`);
 		found = found.replace(/log\((\d+)\)/g, `log($1)`);
 	}
 	return found;
