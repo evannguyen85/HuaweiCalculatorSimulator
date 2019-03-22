@@ -63,6 +63,12 @@ body {
 	text-align: right;
 }
 
+#note {
+	overflow-x: hidden;
+	text-align: left;
+	color: grey;
+}
+
 .keypad {
 	background-color: white;
 	border: 0.5px solid grey;
@@ -148,7 +154,7 @@ body {
 	.out-panel-extended-mode {
 		display: block;
 		border: 1px dashed rebeccapurple;
-		height: 80px;
+		height: 150px;
 		background-color: lightgrey;
 	}
 

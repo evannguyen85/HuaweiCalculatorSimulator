@@ -53,8 +53,6 @@ image html color: https://html-color-codes.info/colors-from-image/
 
 
 
-
-
 + Display: block, inline-block
 + Visibility
 + Position
