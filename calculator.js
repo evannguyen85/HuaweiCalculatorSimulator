@@ -37,7 +37,6 @@ function displayEnteredKeys(e) {
 				printResult();
 				keyHistories = [];
 			}
-
 			break;
 		case 'square-root':
 			key = '&#8730;';
@@ -77,7 +76,7 @@ function displayEnteredKeys(e) {
 			showEquation();
 			printResult();
 			break;
-			
+
 		case '10x':
 			key = '10^(';
 			keyHistories.push(key);
@@ -202,13 +201,11 @@ function showEquation() {
 	equationEle.innerHTML = "";
 	resultEle.querySelector("span").innerHTML = "";
 	let len = keyHistories.length;
-	for (let i = 0; i < len - 1; i++) {
+	for (let i = 0; i < len; i++) {
 		//temporarily do not show ' ' in the equation.
 		// equationEle.innerHTML += keyHistories[i] + ' ';
 		equationEle.innerHTML += keyHistories[i];
 	}
-	equationEle.innerHTML += keyHistories[len - 1]; // will need to take care of '(' and ')'
-
 }
 
 function evaluate(keys) {
