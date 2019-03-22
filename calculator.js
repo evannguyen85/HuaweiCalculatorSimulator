@@ -2,7 +2,9 @@ var equationEle = document.getElementById("equation");
 var resultEle = document.getElementById("result");
 var keyHistories = [];
 var degree = true; // true if degree, and false if radian
-var memorizedValue = 0; // to store value in memory register;
+var storedValue = 0; // to store value in memory register;
+var result = 0;
+var mem = document.getElementById('memory');
 
 function displayEnteredKeys(e) {
 	//console.log(e);
@@ -40,6 +42,24 @@ function displayEnteredKeys(e) {
 			}
 			break;
 
+		case 'm+':
+			storeValue(true);
+			break;
+
+		case 'm-':
+			storeValue(false);
+			break;
+
+		case 'mr':
+			if(mem.innerHTML != '') {
+				recallMemory();
+			}
+			break;
+
+		case 'mc':
+			clearMemory();
+			break;
+
 		case '1/x':
 			key = '^(-1)';
 			keyHistories.push(key);
@@ -58,6 +78,7 @@ function displayEnteredKeys(e) {
 			keyHistories.push(key);
 			showEquation();
 			break;
+
 		case 'base-e':
 			key = '&#101;';
 			keyHistories.push(key);
@@ -178,8 +199,7 @@ function calc() {
 
 	if (len <= 0) { return ""; }
 	try {
-		var result = eval(output);
-		// console.log(result);
+		result = eval(output);
 		if (result == 'Infinity') {
 			return "error";
 		}
@@ -387,4 +407,23 @@ function inversion() {
 	} else {
 		console.log("One or more errors");
 	}
+}
+
+function storeValue(added) {
+	mem.innerHTML = 'M';
+	if (added === true) {
+		storedValue += result;
+	} else {
+		storedValue -= result;
+	}
+}
+
+function recallMemory() {
+	clear();
+	resultEle.querySelector("span").innerHTML = storedValue;
+}
+
+function clearMemory() {
+	storedValue = 0;
+	mem.innerHTML = '';
 }
