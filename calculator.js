@@ -2,6 +2,7 @@ var equationEle = document.getElementById("equation");
 var resultEle = document.getElementById("result");
 var keyHistories = [];
 var degree = true; // true if degree, and false if radian
+var memorizedValue = 0; // to store value in memory register;
 
 function displayEnteredKeys(e) {
 	//console.log(e);
@@ -38,6 +39,14 @@ function displayEnteredKeys(e) {
 				keyHistories = [];
 			}
 			break;
+
+		case '1/x':
+			key = '^(-1)';
+			keyHistories.push(key);
+			showEquation();
+			printResult();
+			break;
+
 		case 'square-root':
 			key = '&#8730;';
 			keyHistories.push(key);
@@ -211,8 +220,10 @@ function showEquation() {
 function evaluate(keys) {
 	const keyStr = keys.join('');
 	let found = keyStr.replace(/(\^)(\()(\d)\)/g, '**$3'); // for ^(n)
+
 	if (found.match(/\%\d/g)) { // for 3%5 = 0.03 * 5
 		return found.replace(/(\%)(\d)/g, '*0.01*$2');
+
 	} else if (found.match(/\%/g)) { //for 3% = 0.03
 		return found.replace(/\%/g, '*0.01');
 	} else if (found.match(/\d\!/g)) { //for factorial !
@@ -269,6 +280,10 @@ function evaluate(keys) {
 		found = found.replace(/(\d+)log\((\d+)\)/g, `$1*log($2)`);
 		found = found.replace(/log\((\d+)\)(\d+)/g, `log($1)*$2`);
 		found = found.replace(/log\((\d+)\)/g, `log($1)`);
+
+	} else if (found.match(/\d+\^\(-1\)/g)) { //for log
+		console.log('found 1/x');
+		found = found.replace(/(\d+)\^\(-1\)/g, `1 / $1`);
 	}
 	return found;
 }
