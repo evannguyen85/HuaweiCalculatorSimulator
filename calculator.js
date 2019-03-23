@@ -5,23 +5,24 @@ var degree = true; // true if degree, and false if radian
 var storedValue = 0; // to store value in memory register;
 var result = 0;
 var mem = document.getElementById('memory');
-var eCLicked = false;
+var finalResult = resultEle.getElementsByTagName("span")[0];
 
 function displayEnteredKeys(e) {
 	//console.log(e);
 	var target = e.target;
-	// Once user clicked equal button, the final result is displayed, and user click the first key for the next calc
-	// clear is needed.
-	// this currently do not work with other keys.
-	if(resultEle.classList.contains('final-result')) {
-		clear();
-	}
+
 
 	if (e.target.localName == 'i') {
 		target = e.target.parentNode;
 		//console.log(e.target);
 	}
 	var key = target.dataset.id.trim();
+	// Once user clicked equal button, the final result is displayed, and user click the first key for the next calc
+	// clear is needed.
+	// this currently do not work with other keys.
+	if (resultEle.classList.contains('final-result') && !isNaN(key)) {
+		clear();
+	}
 	var len = keyHistories.length;
 	switch (key) {
 		case 'c':
@@ -40,12 +41,16 @@ function displayEnteredKeys(e) {
 			}
 			break;
 		case 'e':
+			if (finalResult.innerHTML === 'error') {
+				break;
+			}
 			// console.log(equationEle.style);
 			equationEle.className += ' equation-flyout';
 			resultEle.className += ' final-result';
 			if (len > 0) {
 				printResult();
 				keyHistories = [];
+				keyHistories.push(result);
 			}
 			break;
 
@@ -58,7 +63,7 @@ function displayEnteredKeys(e) {
 			break;
 
 		case 'mr':
-			if(mem.innerHTML != '') {
+			if (mem.innerHTML != '') {
 				recallMemory();
 			}
 			break;
@@ -166,6 +171,7 @@ function displayEnteredKeys(e) {
 			break;
 
 		default:
+			console.log(len);
 			//do not display the first key - not a number.
 			//except for - as used for negative number
 			const lastKey = keyHistories[len - 1];
@@ -186,6 +192,7 @@ function displayEnteredKeys(e) {
 				showEquation();
 			}
 			else { //including x^2 happy path. Will handle corner case.
+				console.log('here?');
 				keyHistories.push(key);
 				showEquation();
 			}
@@ -194,7 +201,7 @@ function displayEnteredKeys(e) {
 }
 
 function printResult() {
-	resultEle.getElementsByTagName("span")[0].innerHTML = calc();
+	finalResult.innerHTML = calc();
 }
 
 function calc() {
@@ -236,7 +243,19 @@ function clear() {
 
 function showEquation() {
 	equationEle.innerHTML = "";
+	if(equationEle.classList.contains('equation-flyout')) {
+		equationEle.style.transition = 'none';
+		equationEle.classList.remove('equation-flyout');
+	}
+
+	if (resultEle.classList.contains('final-result')) {
+		resultEle.style.transition = 'none';
+		resultEle.classList.remove('final-result');
+	}
+
+
 	resultEle.querySelector("span").innerHTML = "";
+	console.log(keyHistories);
 	let len = keyHistories.length;
 	for (let i = 0; i < len; i++) {
 		//temporarily do not show ' ' in the equation.
@@ -428,7 +447,8 @@ function storeValue(added) {
 
 function recallMemory() {
 	clear();
-	resultEle.querySelector("span").innerHTML = storedValue;
+	equationEle.innerHTML = storedValue;
+	keyHistories.push(storedValue);
 }
 
 function clearMemory() {
