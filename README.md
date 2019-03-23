@@ -22,7 +22,7 @@ Shortcuts:
 
 
 
-Some notes:
+Some notes for css learning.
 
 Transition: 2s -> slowly display in 2sec
 
