@@ -185,8 +185,8 @@ function displayEnteredKeys(e) {
 			else if ((len == 0 && isNaN(key) && !(key == '-')) || (len == 0 && key == '0')) {
 				clear();
 			}
-			//dont accept two consecutive keys as operators, except for ()
-			else if (len > 0 && isNaN(key) && isNaN(lastKey) && lastKey != '%' && lastKey != ')' && lastKey != '^(2)' && lastKey != '^(3)') {
+			//dont accept two consecutive keys as operators, except for (), %, !, ^2, ^3
+			else if (len > 0 && isNaN(key) && isNaN(lastKey) && lastKey != '%' && lastKey != '!' && lastKey != ')' && lastKey != '^(2)' && lastKey != '^(3)') {
 				lastKey = key;
 				//console.log(keyHistories);
 				showEquation();
@@ -217,7 +217,7 @@ function calc() {
 	output = output.replace(/\-$/, '');
 	output = output.replace(/\/$/, '');
 	output = output.replace(/\*$/, '');
-
+	console.log(output);
 	try {
 		result = eval(output);
 		if (result == 'Infinity') {
@@ -228,7 +228,7 @@ function calc() {
 		}
 	}
 	catch (e) {
-		// console.log("error message: " + e.name);
+		console.log("error message: " + e.name);
 		return "error";
 	}
 }
@@ -249,7 +249,7 @@ function clear() {
 
 function showEquation() {
 	equationEle.innerHTML = "";
-	if(equationEle.classList.contains('equation-flyout')) {
+	if (equationEle.classList.contains('equation-flyout')) {
 		equationEle.style.transition = 'none';
 		equationEle.classList.remove('equation-flyout');
 	}
@@ -259,84 +259,89 @@ function showEquation() {
 		resultEle.classList.remove('final-result');
 	}
 
-
 	resultEle.querySelector("span").innerHTML = "";
 	let len = keyHistories.length;
 	for (let i = 0; i < len; i++) {
 		//temporarily do not show ' ' in the equation.
 		// equationEle.innerHTML += keyHistories[i] + ' ';
-		equationEle.innerHTML += keyHistories[i];
+		if (keyHistories[i] === '/') {
+			equationEle.innerHTML += ' ' + '&#247;' + ' ';
+		} else if (keyHistories[i] === '+' || keyHistories[i] === '-' || keyHistories[i] === '*') {
+			equationEle.innerHTML += ' ' + keyHistories[i] + ' ';
+		} else {
+			equationEle.innerHTML += keyHistories[i];
+		}
 	}
 }
-
+// var keyStr = '5 * 8^(2) + 7log(4) + 7^(1:2)';
 function evaluate(keys) {
 	const keyStr = keys.join('');
-	let found = keyStr.replace(/(\^)(\()(\d)\)/g, '**$3'); // for ^(n)
+	let reg = '';
+	let m = [];
+	let found = '';
 
-	if (found.match(/\%\d/g)) { // for 3%5 = 0.03 * 5
-		return found.replace(/(\%)(\d)/g, '*0.01*$2');
+	// for ^(n)
+	found = keyStr.replace(/(\^)(\()(\d)\)/g, '**$3');
+	// for 3%5 = 0.03 * 5
+	found = found.replace(/(\%)(\d)/g, '*0.01*$2');
+	//for % eg. 3% = 0.03
+	found = found.replace(/\%/g, '*0.01');
 
-	} else if (found.match(/\%/g)) { //for 3% = 0.03
-		return found.replace(/\%/g, '*0.01');
-	} else if (found.match(/\d\!/g)) { //for factorial !
-		const reg = /(\d+)\!/g;
-		let m = reg.exec(found);
-		return found.replace(/(\d+\!)/g, factorial(m[1]));
-	} else if (found.match(/&#8730;/g)) { //for square root
-		// console.log("found square root");
-		if (/\d+&#8730;/g) {
-			found = found.replace(/(\d+)&#8730;/g, '$1*&#8730;');
-			// console.log(found);
-		}
-		const reg = /&#8730;(\d+)/g;
-		let m = reg.exec(found);
-		if(m) {
-			found = found.replace(/(&#8730;\d+)/g, sqrt(m[1]));
-		}
-	} else if (found.match(/(\d+)(\^)(\()1:(\d+)\)/g)) { //for nth root
-		const reg = /(\d+)(\^)(\()(1:)(\d+)\)/; //do not use global here.
-		var m;
-		while ((m = reg.exec(found)) !== null) {
-			found = found.replace(/\d+\^\(1:\d+\)/, nthRoot(m[1], m[5]));
-		}
-	} else if (found.match(/&#928;/g)) { //for pi
-		found = found.replace(/(\d+)&#928;/g, '$1*pi()');
-		found = found.replace(/&#928;(\d+)/g, '$1*pi()');
-		found = found.replace(/&#928;/g, pi());
-
-	} else if (found.match(/&#101;/g)) { //for base e
-		found = found.replace(/(\d+)&#101;/g, `$1*baseE()`);
-		found = found.replace(/&#101;(\d+)/g, `$1*baseE()`);
-		found = found.replace(/&#101;/g, baseE());
-
-	} else if (found.match(/sin\(\d+/g)) { //for sin
-		found = found.replace(/(\d+)sin\((\d+)\)/g, `$1*sin($2)`);
-		found = found.replace(/sin\((\d+)\)(\d+)/g, `sin($1)*$2`);
-		found = found.replace(/sin\((\d+)\)/g, `sin($1)`);
-
-	} else if (found.match(/cos\(\d+/g)) { //for cos
-		found = found.replace(/(\d+)cos\((\d+)\)/g, `$1*cos($2)`);
-		found = found.replace(/cos\((\d+)\)(\d+)/g, `cos($1)*$2`);
-		found = found.replace(/cos\((\d+)\)/g, `cos($1)`);
-
-	} else if (found.match(/tan\(\d+/g)) { //for tan
-		found = found.replace(/(\d+)tan\((\d+)\)/g, `$1*tan($2)`);
-		found = found.replace(/tan\((\d+)\)(\d+)/g, `tan($1)*$2`);
-		found = found.replace(/tan\((\d+)\)/g, `tan($1)`);
-
-	} else if (found.match(/ln\(\d+/g)) { //for ln
-		found = found.replace(/(\d+)ln\((\d+)\)/g, `$1*ln($2)`);
-		found = found.replace(/ln\((\d+)\)(\d+)/g, `ln($1)*$2`);
-		found = found.replace(/ln\((\d+)\)/g, `ln($1)`);
-
-	} else if (found.match(/log\(\d+/g)) { //for log
-		found = found.replace(/(\d+)log\((\d+)\)/g, `$1*log($2)`);
-		found = found.replace(/log\((\d+)\)(\d+)/g, `log($1)*$2`);
-		found = found.replace(/log\((\d+)\)/g, `log($1)`);
-
-	} else if (found.match(/\d+\^\(-1\)/g)) { //for log
-		found = found.replace(/(\d+)\^\(-1\)/g, `1 / $1`);
+	reg = /(\d+)\!/; //do not use global here.
+	while ((m = reg.exec(found)) !== null) {
+		found = found.replace(/(\d+)\!/, factorial(m[1]));
 	}
+
+	//for square root
+	found = found.replace(/(\d+)&#8730;/g, '$1*&#8730;');
+	reg = /&#8730;(\d+)/; //do not use global here.
+	while ((m = reg.exec(found)) !== null) {
+		found = found.replace(/&#8730;(\d+)/, sqrt(m[1]));
+	}
+
+	// for nth root
+	reg = /(\d+)(\^)(\()(1:)(\d+)\)/; //do not use global here.
+	while ((m = reg.exec(found)) !== null) {
+		found = found.replace(/\d+\^\(1:\d+\)/, nthRoot(m[1], m[5]));
+	}
+
+	//for pi
+	found = found.replace(/(\d+)&#928;/g, '$1*pi()');
+	found = found.replace(/&#928;(\d+)/g, '$1*pi()');
+	found = found.replace(/&#928;/g, pi());
+
+	//for base e
+	found = found.replace(/(\d+)&#101;/g, `$1*baseE()`);
+	found = found.replace(/&#101;(\d+)/g, `$1*baseE()`);
+	found = found.replace(/&#101;/g, baseE());
+
+	//for sin
+	found = found.replace(/(\d+)sin\((\d+)\)/g, `$1*sin($2)`);
+	found = found.replace(/sin\((\d+)\)(\d+)/g, `sin($1)*$2`);
+	found = found.replace(/sin\((\d+)\)/g, `sin($1)`);
+
+	//for cos
+	found = found.replace(/(\d+)cos\((\d+)\)/g, `$1*cos($2)`);
+	found = found.replace(/cos\((\d+)\)(\d+)/g, `cos($1)*$2`);
+	found = found.replace(/cos\((\d+)\)/g, `cos($1)`);
+
+	//for tan
+	found = found.replace(/(\d+)tan\((\d+)\)/g, `$1*tan($2)`);
+	found = found.replace(/tan\((\d+)\)(\d+)/g, `tan($1)*$2`);
+	found = found.replace(/tan\((\d+)\)/g, `tan($1)`);
+
+	//for ln
+	found = found.replace(/(\d+)ln\((\d+)\)/g, `$1*ln($2)`);
+	found = found.replace(/ln\((\d+)\)(\d+)/g, `ln($1)*$2`);
+	found = found.replace(/ln\((\d+)\)/g, `ln($1)`);
+
+	// for log
+	found = found.replace(/(\d+)log\((\d+)\)/g, `$1*log($2)`);
+	found = found.replace(/log\((\d+)\)(\d+)/g, `log($1)*$2`);
+	found = found.replace(/log\((\d+)\)/g, `log($1)`);
+
+	//for 1/x
+	found = found.replace(/(\d+)\^\(-1\)/g, `1 / $1`);
 	return found;
 }
 

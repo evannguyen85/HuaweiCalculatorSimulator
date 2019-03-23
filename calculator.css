@@ -55,6 +55,7 @@ body {
 	overflow-x: hidden;
 	text-align: left;
 	color: #d9d9d9;
+	font-size: 20px;
 }
 
 #memory {
@@ -119,7 +120,7 @@ body {
 
 /* when clicking equal button. */
 .final-result {
-	font-size: 50px;
+	font-size: 40px;
 	color: black;
 	transform: translateY(-100%);
 	line-height: 30px;
