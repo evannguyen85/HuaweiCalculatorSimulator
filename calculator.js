@@ -200,7 +200,12 @@ function displayEnteredKeys(e) {
 }
 
 function printResult() {
-	finalResult.innerHTML = calc();
+	const res = calc();
+	if(!isNaN(res)) {
+		finalResult.innerHTML = res.toLocaleString('en');
+	} else {
+		finalResult.innerHTML = res;
+	}
 }
 
 function calc() {
