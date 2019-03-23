@@ -40,9 +40,9 @@ function displayEnteredKeys(e) {
 			}
 			break;
 		case 'e':
-			//console.log("clicked e");
-			equationEle.innerHTML = "";
-			resultEle.className += " final-result";
+			// console.log(equationEle.style);
+			equationEle.className += ' equation-flyout';
+			resultEle.className += ' final-result';
 			if (len > 0) {
 				printResult();
 				keyHistories = [];
@@ -228,8 +228,9 @@ for (var i = keypads.length - 1; i >= 0; i--) {
 
 function clear() {
 	equationEle.innerHTML = "";
+	equationEle.classList.remove('equation-flyout');
 	resultEle.querySelector("span").innerHTML = "";
-	resultEle.className = "col in-out-panel";
+	resultEle.classList.remove('final-result');
 	keyHistories = [];
 }
 

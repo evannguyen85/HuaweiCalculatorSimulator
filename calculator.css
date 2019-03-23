@@ -133,9 +133,18 @@ body {
 .final-result {
 	font-size: 50px;
 	color: black;
-	transform: translateY(-60%);
+	transform: translateY(-100%);
 	line-height: 30px;
 	overflow: visible;
+}
+
+#equation {
+	transition: 0.5s;
+}
+
+.equation-flyout {
+	transform: translateY(-300%);
+	opacity: 0;
 }
 
 /* Extended calculator */
