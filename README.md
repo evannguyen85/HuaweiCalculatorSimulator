@@ -8,7 +8,23 @@ The project helps me to learn the following topics:
 4) getting started with responsive design.
 5) Git, version control
 
-Transition: 2s -> khi ma element thay doi thi no se thay doi tu tu
+
+Shortcuts:
+- p: pi
+- c: cos
+- s: sin
+- t: tan
+- q: square root
+- e: e
+- r: nth-root
+- g: log
+- l: ln
+
+
+
+Some notes:
+
+Transition: 2s -> slowly display in 2sec
 
 transform:
 	+ rotate(20deg): rotate the element
@@ -39,19 +55,11 @@ responsive:
 developer tool:
 - computed
 - style
-- arrow left: go to wrapper, 
+- arrow left: go to wrapper,
 
 review again the box model.
 
 image html color: https://html-color-codes.info/colors-from-image/
-
-
-
-
-
-
-
-
 
 + Display: block, inline-block
 + Visibility

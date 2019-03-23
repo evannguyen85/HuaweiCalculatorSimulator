@@ -115,7 +115,6 @@ body {
 
 #result > span {
 	color: grey;
-	transition: 0.5s;
 }
 
 /* when clicking equal button. */
@@ -125,10 +124,6 @@ body {
 	transform: translateY(-100%);
 	line-height: 30px;
 	overflow: visible;
-}
-
-#equation {
-	transition: 0.5s;
 }
 
 .equation-flyout {

@@ -74,7 +74,9 @@ function displayEnteredKeys(e) {
 			if (finalResult.innerHTML === 'error') {
 				break;
 			}
+			equationEle.style.transition = '0.5s';
 			equationEle.className += ' equation-flyout';
+			resultEle.style.transition = '0.5s';
 			resultEle.className += ' final-result';
 			if (len > 0) {
 				printResult();
