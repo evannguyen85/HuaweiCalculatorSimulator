@@ -1,5 +1,5 @@
-# HuaweiCalculatorSimulator
-This simple app is to practice html, css and javascript. It implements the design and functionalities of the calculator in a huawei smartphone Nova 2i.
+# MyCalculator
+This simple app is to practice html, css and javascript. It implements the design and functionalities of the calculator following a huawei smartphone Nova 2i.
 
 The project helps me to learn the following topics:
 1) Html
