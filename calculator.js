@@ -7,29 +7,58 @@ var result = 0;
 var mem = document.getElementById('memory');
 var finalResult = resultEle.getElementsByTagName("span")[0];
 
+var keypads = document.getElementsByClassName("keypad");
+for (var i = keypads.length - 1; i >= 0; i--) {
+	keypads[i].addEventListener("click", function (event) {
+		displayEnteredKeys(event);
+	}, false);
+}
+
+document.addEventListener('keyup', function (event) {
+	displayEnteredKeys(event);
+}, false);
+
 function displayEnteredKeys(e) {
-	//console.log(e);
-	var target = e.target;
-
-
-	if (e.target.localName == 'i') {
-		target = e.target.parentNode;
-		//console.log(e.target);
+	// console.log(e);
+	var key = '';
+	if (e.type === 'click') {
+		var target = e.target;
+		if (e.target.localName == 'i') {
+			target = e.target.parentNode;
+		}
+		key = target.dataset.id.trim();
+	} else if (e.type === 'keyup') {
+		key = e.key;
+	} else {
+		console.log('Undefined event')
 	}
-	var key = target.dataset.id.trim();
+
 	// Once user clicked equal button, the final result is displayed, and user click the first key for the next calc
 	// clear is needed.
-	// this currently do not work with other keys.
 	if (resultEle.classList.contains('final-result') && !isNaN(key)) {
 		clear();
 	}
+
+
+	if (key === 'Shift') {
+		return;
+	}
+
 	var len = keyHistories.length;
-	switch (key) {
-		case 'c':
-			//console.log("clicked C");
+	var lastKey = keyHistories[len - 1];
+
+	switch (true) {
+		case !isNaN(key) || key === '+' || key === '-' || key === '/' || key === '*' || key === ')' || key === '(' || key === '^(2)' || key === '^(3)' || key === '^(':
+			keyHistories.push(key);
+			showEquation();
+			printResult();
+			break;
+
+		case key === 'Escape':
 			clear();
 			break;
-		case 'b':
+
+		case key === 'Backspace':
 			//console.log("clicked b");
 			if (len > 0) {
 				keyHistories.pop();
@@ -40,11 +69,11 @@ function displayEnteredKeys(e) {
 				clear();
 			}
 			break;
-		case 'e':
+
+		case key === '=' || key === 'Enter':
 			if (finalResult.innerHTML === 'error') {
 				break;
 			}
-			// console.log(equationEle.style);
 			equationEle.className += ' equation-flyout';
 			resultEle.className += ' final-result';
 			if (len > 0) {
@@ -54,154 +83,146 @@ function displayEnteredKeys(e) {
 			}
 			break;
 
-		case 'm+':
+		case key === 'm+':
 			storeValue(true);
 			break;
 
-		case 'm-':
+		case key === 'm-':
 			storeValue(false);
 			break;
 
-		case 'mr':
+		case key === 'mr':
 			if (mem.innerHTML != '') {
 				recallMemory();
 			}
 			break;
 
-		case 'mc':
+		case key === 'mc':
 			clearMemory();
 			break;
 
-		case '1/x':
+		case key === '1/x':
 			key = '^(-1)';
 			keyHistories.push(key);
 			showEquation();
 			printResult();
 			break;
 
-		case 'square-root':
+		case key === 'square-root' || key === 'q':
 			key = '&#8730;';
 			keyHistories.push(key);
 			showEquation();
 			break;
 
-		case 'nth-root':
+		case key === 'nth-root' || key === 'r':
 			key = '^(1:';
 			keyHistories.push(key);
 			showEquation();
 			break;
 
-		case 'base-e':
+		case key === 'base-e' || key === 'e':
 			key = '&#101;';
 			keyHistories.push(key);
 			showEquation();
 			printResult();
 			break;
 
-		case 'ln':
+		case key === 'ln' || key === 'l':
 			key = 'ln(';
 			keyHistories.push(key);
 			showEquation();
 			printResult();
 			break;
 
-		case 'log':
+		case key === 'log' || key === 'g':
 			key = 'log(';
 			keyHistories.push(key);
 			showEquation();
 			printResult();
 			break;
 
-		case 'ex':
+		case key === 'ex':
 			key = '&#101;^(';
 			keyHistories.push(key);
 			showEquation();
 			printResult();
 			break;
 
-		case '10x':
+		case key === '10x':
 			key = '10^(';
 			keyHistories.push(key);
 			showEquation();
 			printResult();
 			break;
 
-		case 'sin':
+		case key === 'sin' || key === 's':
 			key = 'sin(';
 			keyHistories.push(key);
 			showEquation();
 			printResult();
 			break;
 
-		case 'cos':
+		case key === 'cos' || key === 'c':
 			key = 'cos(';
 			keyHistories.push(key);
 			showEquation();
 			printResult();
 			break;
 
-		case 'tan':
+		case key === 'tan' || key === 't':
 			key = 'tan(';
 			keyHistories.push(key);
 			showEquation();
 			printResult();
 			break;
 
-		case 'pi':
+		case key === 'pi' || key === 'p':
 			key = '&#928;';
 			keyHistories.push(key);
 			showEquation();
 			printResult();
 			break;
 
-		case 'deg':
+		case key === 'deg':
 			degree = false;
 			degToRad();
 			printResult();
 			break;
 
-		case 'rad':
+		case key === 'rad':
 			degree = true;
 			radToDeg();
 			printResult();
 			break;
 
-		case 'inv':
+		case key === 'inv':
 			inversion();
 			break;
 
-		default:
-			// console.log(len);
-			//do not display the first key - not a number.
-			//except for - as used for negative number
-			var lastKey = keyHistories[len - 1];
+		// for negative number
+		case len == 0 && key == '-':
+			keyHistories[0] = key;
+			showEquation();
+			break;
 
-			//for negative number
-			if (len == 0 && (key == '-')) {
-				keyHistories[0] = key;
-				showEquation();
-			}
-			//dont accept the first key as operator (except for -), or first key as 0
-			else if ((len == 0 && isNaN(key) && !(key == '-')) || (len == 0 && key == '0')) {
-				clear();
-			}
-			//dont accept two consecutive keys as operators, except for (), %, !, ^2, ^3
-			else if (len > 0 && isNaN(key) && isNaN(lastKey) && lastKey != '%' && lastKey != '!' && lastKey != ')' && lastKey != '^(2)' && lastKey != '^(3)') {
-				lastKey = key;
-				//console.log(keyHistories);
-				showEquation();
-			}
-			else { //including x^2 happy path. Will handle corner case.
-				keyHistories.push(key);
-				showEquation();
-			}
+		case (len == 0 && isNaN(key) && !(key == '-')) || (len == 0 && key == '0'):
+			clear();
+			break;
+
+		case len > 0 && isNaN(key) && isNaN(lastKey) && lastKey != '%' && lastKey != '!' && lastKey != ')' && lastKey != '^(2)' && lastKey != '^(3)':
+			lastKey = key;
+			showEquation();
 			printResult();
+			break;
+
+		default:
+			break;
 	}
 }
 
 function printResult() {
 	const res = calc();
-	if(!isNaN(res)) {
+	if (!isNaN(res)) {
 		finalResult.innerHTML = res.toLocaleString('en');
 	} else {
 		finalResult.innerHTML = res;
@@ -222,7 +243,7 @@ function calc() {
 	output = output.replace(/\-$/, '');
 	output = output.replace(/\/$/, '');
 	output = output.replace(/\*$/, '');
-	console.log(output);
+
 	try {
 		result = eval(output);
 		if (result == 'Infinity') {
@@ -236,12 +257,6 @@ function calc() {
 		console.log("error message: " + e.name);
 		return "error";
 	}
-}
-
-var keypads = document.getElementsByClassName("keypad");
-for (var i = keypads.length - 1; i >= 0; i--) {
-	let len = keyHistories.length;
-	keypads[i].addEventListener("click", displayEnteredKeys, false);
 }
 
 function clear() {
@@ -267,8 +282,6 @@ function showEquation() {
 	resultEle.querySelector("span").innerHTML = "";
 	let len = keyHistories.length;
 	for (let i = 0; i < len; i++) {
-		//temporarily do not show ' ' in the equation.
-		// equationEle.innerHTML += keyHistories[i] + ' ';
 		if (keyHistories[i] === '/') {
 			equationEle.innerHTML += ' ' + '&#247;' + ' ';
 		} else if (keyHistories[i] === '+' || keyHistories[i] === '-' || keyHistories[i] === '*') {

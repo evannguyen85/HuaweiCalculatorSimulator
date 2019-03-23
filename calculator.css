@@ -87,7 +87,7 @@ body {
 	line-height: 30px;
 }
 
-.keypad[data-id='e'] {
+.keypad[data-id='='] {
 	text-align: center;
 	background-color: #1a75ff;
 	/* 80px = height, then minus 2 borders (top and bottom, 1px each) */
