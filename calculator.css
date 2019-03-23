@@ -94,6 +94,8 @@ body {
 .equal-keypad {
 	padding: 0;
 	height: 80px;
+	font-size: 40px;
+	line-height: 30px;
 }
 
 .keypad[data-id='e'] {
@@ -109,8 +111,13 @@ body {
 	background-color: #f6f6f6;
 }
 
-.green-keypad {
+.blue-keypad {
 	color: #1a75ff;
+}
+
+.blue-keypad:not(.bs) {
+	font-size: 40px;
+	line-height: 30px;
 }
 
 .sci-keypad {

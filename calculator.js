@@ -12,6 +12,7 @@ function displayEnteredKeys(e) {
 	var target = e.target;
 	// Once user clicked equal button, the final result is displayed, and user click the first key for the next calc
 	// clear is needed.
+	// this currently do not work with other keys.
 	if(resultEle.classList.contains('final-result')) {
 		clear();
 	}
