@@ -44,8 +44,8 @@ body {
 /* Basic Calculator */
 .calc-title {
 	text-align: center;
-	margin-top: 50px;
-	margin-bottom: 30px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 .basic-calculator {
@@ -82,8 +82,8 @@ body {
 }
 
 .keypad:hover {
-	transform: translate(-1px,-1px);
-	background-color: #E9ECEF;
+	background-color: #d9d9d9;
+	z-index: 1;
 }
 
 .custom-row-height {
