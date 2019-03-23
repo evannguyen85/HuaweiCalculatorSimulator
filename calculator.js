@@ -171,10 +171,10 @@ function displayEnteredKeys(e) {
 			break;
 
 		default:
-			console.log(len);
+			// console.log(len);
 			//do not display the first key - not a number.
 			//except for - as used for negative number
-			const lastKey = keyHistories[len - 1];
+			var lastKey = keyHistories[len - 1];
 
 			//for negative number
 			if (len == 0 && (key == '-')) {
@@ -186,13 +186,12 @@ function displayEnteredKeys(e) {
 				clear();
 			}
 			//dont accept two consecutive keys as operators, except for ()
-			else if (len > 0 && isNaN(key) && isNaN(lastKey) && lastKey != '%' && lastKey != ')' && lastKey == '^(2)' && lastKey == '^(3)') {
+			else if (len > 0 && isNaN(key) && isNaN(lastKey) && lastKey != '%' && lastKey != ')' && lastKey != '^(2)' && lastKey != '^(3)') {
 				lastKey = key;
 				//console.log(keyHistories);
 				showEquation();
 			}
 			else { //including x^2 happy path. Will handle corner case.
-				console.log('here?');
 				keyHistories.push(key);
 				showEquation();
 			}
@@ -210,8 +209,15 @@ function calc() {
 	var len = keyHistories.length;
 	output = evaluate(keyHistories);
 	// console.log(output);
+	if (len <= 0) {
+		return "";
+	}
 
-	if (len <= 0) { return ""; }
+	output = output.replace(/\+$/, '');
+	output = output.replace(/\-$/, '');
+	output = output.replace(/\/$/, '');
+	output = output.replace(/\*$/, '');
+
 	try {
 		result = eval(output);
 		if (result == 'Infinity') {
@@ -255,7 +261,6 @@ function showEquation() {
 
 
 	resultEle.querySelector("span").innerHTML = "";
-	console.log(keyHistories);
 	let len = keyHistories.length;
 	for (let i = 0; i < len; i++) {
 		//temporarily do not show ' ' in the equation.
@@ -285,8 +290,9 @@ function evaluate(keys) {
 		}
 		const reg = /&#8730;(\d+)/g;
 		let m = reg.exec(found);
-		//console.log(m);
-		return found.replace(/(&#8730;\d+)/g, sqrt(m[1]));
+		if(m) {
+			found = found.replace(/(&#8730;\d+)/g, sqrt(m[1]));
+		}
 	} else if (found.match(/(\d+)(\^)(\()1:(\d+)\)/g)) { //for nth root
 		const reg = /(\d+)(\^)(\()(1:)(\d+)\)/; //do not use global here.
 		var m;
@@ -329,7 +335,6 @@ function evaluate(keys) {
 		found = found.replace(/log\((\d+)\)/g, `log($1)`);
 
 	} else if (found.match(/\d+\^\(-1\)/g)) { //for log
-		console.log('found 1/x');
 		found = found.replace(/(\d+)\^\(-1\)/g, `1 / $1`);
 	}
 	return found;

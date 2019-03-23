@@ -29,18 +29,6 @@ body {
 	height: 30px;
 }
 
-.search-textbox {
-	width: 150px;
-	height: 40px;
-    font-size: 16pt;
-}
-
-.search-button {
-	height: 40px;
-    font-size: 16pt;
-    line-height: 16px;
-}
-
 /* Basic Calculator */
 .calc-title {
 	text-align: center;
