@@ -5,10 +5,16 @@ var degree = true; // true if degree, and false if radian
 var storedValue = 0; // to store value in memory register;
 var result = 0;
 var mem = document.getElementById('memory');
+var eCLicked = false;
 
 function displayEnteredKeys(e) {
 	//console.log(e);
 	var target = e.target;
+	// Once user clicked equal button, the final result is displayed, and user click the first key for the next calc
+	// clear is needed.
+	if(resultEle.classList.contains('final-result')) {
+		clear();
+	}
 
 	if (e.target.localName == 'i') {
 		target = e.target.parentNode;
@@ -191,7 +197,7 @@ function printResult() {
 }
 
 function calc() {
-	//will need to handle long equation	
+	//will need to handle long equation
 	var output = "";
 	var len = keyHistories.length;
 	output = evaluate(keyHistories);

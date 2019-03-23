@@ -66,7 +66,7 @@ body {
 #note {
 	overflow-x: hidden;
 	text-align: left;
-	color: grey;
+	color: #d9d9d9;
 }
 
 #memory {
@@ -124,16 +124,14 @@ body {
 
 /* when clicking equal button. */
 .final-result {
-	font-size: 40px;
+	font-size: 50px;
 	color: black;
-	transform: translateY(-30%);
+	transform: translateY(-60%);
 	line-height: 30px;
+	overflow: visible;
 }
 
 /* Extended calculator */
-/* .out-panel-extended-mode, .extended-calculator, .extended-mode {
-	display: none;
-} */
 
 .extended-calculator, .extended-mode {
 	display: none;
