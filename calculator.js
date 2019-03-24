@@ -46,9 +46,29 @@ function displayEnteredKeys(e) {
 
 	var len = keyHistories.length;
 	var lastKey = keyHistories[len - 1];
+	var keyFlag = checkOperator(key);
+	var lastKeyFlag = checkOperator(lastKey);
 
 	switch (true) {
-		case !isNaN(key) || key === '+' || key === '-' || key === '/' || key === '*' || key === ')' || key === '(' || key === '^(2)' || key === '^(3)' || key === '^(':
+		// for negative number
+		case len == 0 && key == '-':
+			keyHistories[0] = key;
+			showEquation();
+			break;
+		// doesnt accept first key as + * / and 0
+		case (len == 0 && !(key == '-') && keyFlag):
+			clear();
+			break;
+
+		// doesnt accept two consecutive keys as operators.
+		case len > 0 && lastKeyFlag && keyFlag:
+			lastKey = key;
+			showEquation();
+			printResult();
+			break;
+
+		// keys as numbers
+		case !isNaN(key) || keyFlag || key === ')' || key === '(' || key === '^(2)' || key === '^(3)' || key === '^(' || key === '!' || key === '%' || key === '.':
 			keyHistories.push(key);
 			showEquation();
 			printResult();
@@ -201,22 +221,6 @@ function displayEnteredKeys(e) {
 			inversion();
 			break;
 
-		// for negative number
-		case len == 0 && key == '-':
-			keyHistories[0] = key;
-			showEquation();
-			break;
-
-		case (len == 0 && isNaN(key) && !(key == '-')) || (len == 0 && key == '0'):
-			clear();
-			break;
-
-		case len > 0 && isNaN(key) && isNaN(lastKey) && lastKey != '%' && lastKey != '!' && lastKey != ')' && lastKey != '^(2)' && lastKey != '^(3)':
-			lastKey = key;
-			showEquation();
-			printResult();
-			break;
-
 		default:
 			break;
 	}
@@ -236,18 +240,22 @@ function calc() {
 	var output = "";
 	var len = keyHistories.length;
 	output = evaluate(keyHistories);
-	// console.log(output);
+
 	if (len <= 0) {
 		return "";
 	}
-
+	console.log(output);
 	output = output.replace(/\+$/, '');
 	output = output.replace(/\-$/, '');
 	output = output.replace(/\/$/, '');
 	output = output.replace(/\*$/, '');
-
+	console.log(output);
+	if (output == '') {
+		return "";
+	}
 	try {
 		result = eval(output);
+		console.log(result);
 		if (result == 'Infinity') {
 			return "error";
 		}
@@ -256,7 +264,7 @@ function calc() {
 		}
 	}
 	catch (e) {
-		console.log("error message: " + e.name);
+		// console.log("error message: " + e.name);
 		return "error";
 	}
 }
@@ -484,4 +492,20 @@ function recallMemory() {
 function clearMemory() {
 	storedValue = 0;
 	mem.innerHTML = '';
+}
+
+function checkOperator(key) {
+	let flag = false;
+	switch (key) {
+		case '+':
+		case '-':
+		case '*':
+		case '/':
+			flag = true;
+			break;
+		default:
+			flag = false;
+			break;
+	}
+	return flag;
 }
