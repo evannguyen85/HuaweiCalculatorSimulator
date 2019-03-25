@@ -1,3 +1,16 @@
+window.addEventListener("orientationchange", function () {
+	var orientation = screen.msOrientation || screen.mozOrientation || (screen.orientation || {}).type;
+	console.log("The orientation of the screen is: " + orientation);
+	var title = this.document.getElementsByClassName('calc-title')[0];
+	var ioRows = this.document.getElementsByClassName('custom-row-height-lg');
+	var keyRows = this.document.getElementsByClassName('custom-row-height');
+	if(orientation.match(/landscape/)) {
+		title.style.display = 'none';
+	} else {
+		title.style.display = 'block';
+	}
+  });
+
 var equationEle = document.getElementById("equation");
 var resultEle = document.getElementById("result");
 var keyHistories = [];
@@ -244,18 +257,18 @@ function calc() {
 	if (len <= 0) {
 		return "";
 	}
-	console.log(output);
+	// console.log(output);
 	output = output.replace(/\+$/, '');
 	output = output.replace(/\-$/, '');
 	output = output.replace(/\/$/, '');
 	output = output.replace(/\*$/, '');
-	console.log(output);
+	// console.log(output);
 	if (output == '') {
 		return "";
 	}
 	try {
 		result = eval(output);
-		console.log(result);
+		// console.log(result);
 		if (result == 'Infinity') {
 			return "error";
 		}

@@ -38,15 +38,15 @@
 	<div class="container">
 		<div class="calc-title">
 			<div class="basic-mode">
-				<h5>My Calculator - Simple Mode</h5>
-				<p>(Larger screen to include scientific mode)</p>
+				<h6>Calculator - Simple Mode</h6>
+				<p style="font-size: 16px;">(Larger screen to include scientific mode)</p>
 			</div>
 			<div class="extended-mode">
-				<h5>My Calculator - Scientific Mode</h5>
-				<p>(Smaller screen for simple mode)</p>
+				<h6>Calculator - Scientific Mode</h6>
+				<p style="font-size: 16px;">(Smaller screen for simple mode)</p>
 			</div>
 		</div>
-		<div class="row" style="border: 1px solid #e6e6e6; font-size: 30px;">
+		<div class="row" style="border: 1px solid #e6e6e6; font-size: 30px; margin-top: 5px;">
 			<div class="col-sm-12 calc-panel">
 				<div class="row custom-row-height-lg">
 					<div class="col in-out-panel" id="note">DEG
@@ -65,7 +65,7 @@
 		</div>
 		<div class="row">
 			<!-- Extended calculator -->
-			<div class="col-md-5 extended-calculator">
+			<div class="col-md-5 col-sm-5 extended-calculator">
 				<div class="row custom-row-height">
 					<div class="col-4 keypad sci-keypad" data-id="(">(</div>
 					<div class="col-4 keypad sci-keypad" data-id=")">)</div>
@@ -99,7 +99,7 @@
 			</div>
 
 			<!-- Basic calculator -->
-			<div class="col-md-7 col-sm-12 basic-calculator">
+			<div class="col-md-7 col-sm-7 col-xs-12 basic-calculator">
 				<div class="row custom-row-height">
 					<div class="col-3 keypad fn-keypad" data-id="mc">mc</div>
 					<div class="col-3 keypad fn-keypad" data-id="m+">m+</div>
@@ -144,6 +144,11 @@
 			</div>
 		</div>
 	</div>
+	<footer>
+		<p>
+			&copy;2019 Evan Nguyen
+		</p>
+	</footer>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="libs/jquery/jquery-3.3.1.slim.min.js"></script>
 	<script src="libs/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
